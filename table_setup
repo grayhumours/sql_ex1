@@ -1,0 +1,219 @@
+-- MySQL database creation--
+
+CREATE SCHEMA `p_2`;
+
+CREATE TABLE `p_2`.`users` 
+(
+  `user_id` INT NOT NULL,
+  `name` VARCHAR(20) NULL,
+  `surname` VARCHAR(30) NULL,
+  `phone` VARCHAR(15) NULL,
+  `address` VARCHAR(45) NULL,
+  PRIMARY KEY (`user_id`)
+  );
+
+CREATE TABLE `p_2`.`usersaddress` 
+(
+  `user_id` INT NOT NULL,
+  `zip_code` VARCHAR(45) NULL,
+  `city` VARCHAR(45) NULL,
+  `street` VARCHAR(45) NULL,
+  `number` INT NULL,
+  `apartment` INT NULL,
+  PRIMARY KEY (`user_id`)
+  );
+
+CREATE TABLE `p_2`.`sales` 
+(
+  `sale_id` INT NOT NULL
+  `user_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `order_date` DATE NULL,
+  PRIMARY KEY (`sale_id`),
+  FOREIGN KEY (`product_id`) REFERENCES `sales` (`product_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+  );
+
+
+CREATE TABLE `p_2`.`products` 
+(
+  `product_id` INT NOT NULL,
+  `product_name` VARCHAR(45) NULL,
+  `manufacturer_id` INT NOT NULL,
+  `cost` VARCHAR(45) NULL,
+  PRIMARY KEY (`product_id`),
+  FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturers` (`manufacturer_id`)
+  );
+
+  CREATE TABLE `p_2`.`manufacturers` 
+(
+  `manufacturer_id` INT NOT NULL,
+  `manufacturer_name` VARCHAR(45) NULL,
+  `manufacturer_address` VARCHAR(50) NULL,
+  PRIMARY KEY (`manufacturer_id`)
+  );
+
+CREATE TABLE `p_2`.`newsletter` 
+(
+  `user_id` INT NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `newsletter` CHAR(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+  );
+
+  -- Adding user values --
+
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (1, "Marta", "Kosicka", "512839749");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (2, "Katarzyna", "Popłacka", "512734890");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (3, "Andy", "Borne", "512627892");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (4, "Karolina", "Miłosz", "694350890");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (5, "Miłosz", "Banan", "514783976");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (6, "Konrad", "Kowalski", "573489265");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (7, "Weronika", "Trzcińska", "520675381");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (8, "Sebastian", "Stan", "749896664");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (9, "Simon", "Smith", "512839783");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (10, "Luda", "Koralova", "694812634");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (11, "Martyna", "Sielicka", "511810986");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (12, "Iga", "Balus", "580225225");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (13, "Daria", "Rozeńska", "694812742");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (14, "Bartosz", "Kołczan", "780568822");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (15, "Filip", "Leń", "512839543");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (16, "Karolina", "Chrzturska", "780563192");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (17, "Bartosz", "Zebroń", "58022118");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (18, "Aleksandra", "Wilkuń", "511810654");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (19, "Dominik", "Kozera", "694812512");
+INSERT INTO `users` (`user_id`,`name`,`surname`,`phone`) VALUES (20, "Marek", "Abramowicz", "512839731");
+
+-- Adding address values --
+
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (1, "80-243", "Gdańsk", "Dmowskiego", 8, 2);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (2, "00-001", "Warszawa", "Mazowiecka", 15, 18);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (3, "80-209", "Gdynia", "Szkolna", 7, NULL);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (4, "80-246", "Gdańsk", "Grunwaldzka", 158, 3);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (5, "00-002", "Warszawa", "Mazowiecka", 70, 5);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (6, "82-300", "Elbląg", "Ciągła", 7, NULL);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (7, "80-299", "Gdynia", "Morska", 112, 7);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (8, "00-001", "Warszawa", "Mazowiecka", 18, 3);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (9, "80-342", "Sopot", "Krzywa", 7, NULL);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (10, "00-003", "Warszawa", "Długa", 187, 2);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (11, "45-573", "Wrocław", "Przyjacielska", 2, 2);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (12, "80-273", "Gdańsk", "Łąkowa", 7, 7);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (13, "80-336", "Sopot", "Kolejowa", 13, 2);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (14, "00-009", "Warszawa", "Dworcowa", 9, 1);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (15, "80-209", "Gdynia", "Szkolna", 32, NULL);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (16, "00-001", "Warszawa", "Mazowiecka", 32, 4);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (17, "82-300", "Elbląg", "Saperów", 58, NULL);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (18, "80-336", "Sopot", "Kolejowa", 1, 1);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (19, "00-004", "Warszawa", "Zdolna", 2, NULL);
+INSERT INTO `usersaddress` (`user_id`, `zip_code`, `city`, `street`, `number`, `apartment`) VALUES (20, "80-299", "Gdynia", "Morska", 172, 7);
+
+-- Adding product values --
+
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (1, "S cups", 1, 25);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (2, "M cups", 1, 30);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (3, "L cups", 1, 35);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (4, "sleeves", 1, 15);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (5, "lids", 1, 15);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (6, "straws", 2, 10);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (7, "stirrers", 3, 5);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (8, "napkins", 3, 10);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (9, "sugar bags", 4, 15);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (10, "cake boxes", 5, 20);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (11, "wooden cutlery", 6, 25);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (12, "all purpose cleaner", 7, 3);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (13, "steel cleaner", 7, 4);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (14, "mocrofiber towel", 7, 9);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (15, "gloves", 7, 5);
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (16, "cleaner bleach", 7, 4); 
+INSERT INTO `products` (`product_id`, `product_name`, `manufacturer_id`, `cost`) VALUES (17, "dishwashing liquid", 7, 8);
+
+-- Adding manufacturers values --
+
+INSERT INTO `manufacturers` (`manufacturer_id`, `manufacturer_name`, `manufacturer_address`) VALUES (1, "Gastronomia sp. z o.o.", "Warszawa Konieczna 15");
+INSERT INTO `manufacturers` (`manufacturer_id`, `manufacturer_name`, `manufacturer_address`) VALUES (2, "STRAWberry sp. z o.o.", "Warszawa Spółki 32");
+INSERT INTO `manufacturers` (`manufacturer_id`, `manufacturer_name`, `manufacturer_address`) VALUES (3, "Stir it sp. z o.o.", "Poznań Szczęśliwa 112");
+INSERT INTO `manufacturers` (`manufacturer_id`, `manufacturer_name`, `manufacturer_address`) VALUES (4, "Słodkość sp. z o.o.", "Warszawa Fabryczna 18");
+INSERT INTO `manufacturers` (`manufacturer_id`, `manufacturer_name`, `manufacturer_address`) VALUES (5, "Boks sp. z o.o.", "Warszawa Fabryczna 20");
+INSERT INTO `manufacturers` (`manufacturer_id`, `manufacturer_name`, `manufacturer_address`) VALUES (6, "Knives out sp. z o.o.", "Warszawa Krótka 2");
+INSERT INTO `manufacturers` (`manufacturer_id`, `manufacturer_name`, `manufacturer_address`) VALUES (7, "Czyścioch sp. z o.o.", "Szkolna 10");
+
+-- Adding sales values -- 
+
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (1, 1, 1, "2022-12-12");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (2, 1, 2, "2022-12-12");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (3, 1, 2, "2022-12-12");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (4, 1, 3, "2022-12-12");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (5, 1, 3, "2022-12-12");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (6, 1, 5, "2022-12-12");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (7, 2, 12, "2022-12-7");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (8, 2, 12, "2022-12-7");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (9, 4, 8, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (10, 4, 8, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (11, 4, 8, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (12, 4, 10, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (13, 4, 10, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (14, 4, 11, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (15, 4, 11, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (16, 7, 1, "2022-12-19");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (17, 7, 1, "2022-12-19");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (18, 7, 2, "2022-12-19");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (19, 7, 2, "2022-12-19");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (20, 9, 4, "2022-12-05");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (21, 9, 6, "2022-12-05");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (22, 9, 6, "2022-12-05");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (23, 2, 15, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (24, 2, 14, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (25, 2, 14, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (26, 11, 9, "2022-11-18");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (27, 11, 9, "2022-11-18");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (28, 11, 11, "2022-11-18");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (29, 11, 11, "2022-11-18");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (30, 11, 11, "2022-11-18");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (31, 13, 1, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (32, 13, 1, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (33, 13, 2, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (34, 13, 2, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (35, 13, 2, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (36, 13, 3, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (37, 13, 3, "2022-11-30");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (38, 14, 17, "2022-12-04");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (39, 7, 3, "2022-12-02");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (40, 7, 3, "2022-12-02");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (41, 9, 8, "2022-12-15");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (42, 16, 12, "2022-12-02");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (43, 16, 14, "2022-12-02");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (44, 16, 15, "2022-12-02");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (45, 16, 15, "2022-12-02");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (46, 19, 1, "2022-11-10");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (47, 19, 2, "2022-11-10");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (48, 19, 3, "2022-11-10");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (49, 19, 3, "2022-11-10");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (50, 13, 2, "2022-12-08");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (51, 13, 2, "2022-12-08");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (52, 13, 2, "2022-12-08");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (53, 13, 3, "2022-12-08");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (54, 13, 3, "2022-12-08");
+INSERT INTO `sales` (`sale_id`, `user_id`, `product_id`, `order_date`) VALUES (55, 13, 3, "2022-12-08");
+
+-- Adding newsletter values --
+
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (1, "m.kosi@gmail.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (2, "poplackak@gmail.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (3, "aborn@gmail.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (4, "miloszka@o2.pl", "n");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (5, "bananemi@wp.pl", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (6, "konrad.kowal@gmail.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (7, "wer.trzcinska@wp.pl", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (8, "sebstan@gmail.com", "n");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (9, "smithsimon@outlook.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (10, "koralovaluda@gmail.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (11, "martasielickaa@gmail.com", "n");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (12, "balusiga@o2.pl", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (13, "dariarozen@wp.pl", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (14, "kolczak@gmail.com", "n");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (15, "filen@outlook.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (16, "chrzturskak@gmail.com", "n");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (17, "bartosz.zebron@outlook.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (18, "ola.wilkun@gmail.com", "n");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (19, "dokozera@outlook.com", "y");
+INSERT INTO `newsletter` (`user_id`, `email`, `newsletter`) VALUES (20, "mar.abram@wp.pl", "y");
