@@ -1,0 +1,88 @@
+-- Tasks:
+
+-- A) To check the company growth:
+
+-- 1. Compare how many purcheses we've had in November and in December 2022. 
+-- One way on how to do this is:
+SELECT COUNT(*) FROM sales
+WHERE order_date LIKE "2022-11-%"
+UNION 
+SELECT COUNT(*) FROM sales
+WHERE order_date LIKE "2022-12-%";
+
+--ANSWER In November we've sold 19 products, in December 36.
+
+-- 2. Compare how much we've earned in November and in December 2022.
+-- Using above way of selection:
+SELECT SUM(cost)
+FROM 
+(
+SELECT sales.product_id, cost
+FROM sales
+JOIN products
+ON sales.product_id = products.product_id 
+WHERE order_date LIKE "2022-11-%") AS nov_sales
+UNION
+SELECT SUM(cost)
+FROM 
+(
+SELECT sales.product_id, cost
+FROM sales
+JOIN products
+ON sales.product_id = products.product_id 
+WHERE order_date LIKE "2022-12-%") AS nov_sales;
+
+-- ANSWER In November we've gained 462 and in December 746.
+
+-- B) To decide on where should we open a warehouse:
+
+-- 3. What products are the most popular? Who is their manufacturer and where is it based?
+SELECT sales.product_id, 
+COUNT(sales.product_id) AS sales_per_product, 
+products.product_name, 
+manufacturer_name, 
+manufacturer_address
+FROM sales
+JOIN products
+ON sales.product_id = products.product_id
+JOIN manufacturers
+ON products.manufacturer_id = manufacturers.manufacturer_id
+GROUP BY product_id
+ORDER BY sales_per_product DESC
+LIMIT 3;
+
+-- ANSWER Our most popular products are M and L cups (11/55 sales each), S cup is third most often bought (6/55 sales). All products are from Gastronomia sp. z o.o. based in Warsaw Konieczna 15 street.
+
+SELECT products.product_id, products.product_name
+FROM products
+WHERE products.product_id NOT IN 
+(
+SELECT DISTINCT sales.product_id
+FROM sales);
+
+-- Additionally, there were 3 products that were not sold at all in November and December: stirrers, steel cleaner, cleaner bleach.
+
+-- 4. Which cities buy the most products?
+
+SELECT COUNT(sales.user_id) AS sales_per_user, city
+-- To check all sales we may add here ", (SELECT COUNT(*) FROM sales)" --
+FROM sales
+JOIN users
+ON sales.user_id = users.user_id
+JOIN usersaddress
+ON users.user_id = usersaddress.user_id
+GROUP BY city
+ORDER BY sales_per_user DESC;
+
+-- ANSWER Sopot 17, Warszawa 14, Gdańsk 13 out of all 55 sales.
+
+
+-- C) To check whether we should promote our business through email.
+
+-- 5. How many users are signed to our newsletter?
+SELECT COUNT(*) FROM newsletter AS newsletter_users
+WHERE newsletter = 'y'
+UNION 
+SELECT COUNT(*) FROM newsletter;
+
+-- ANSWER 14 out of 20 users are signed to the newsletter
